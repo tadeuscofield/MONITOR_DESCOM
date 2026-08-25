@@ -1,0 +1,61 @@
+# =====================================================================
+# O repositório publica O MONITOR: a página, o gerador que a recusa a
+# compilar quando um número não reproduz, a base que ele recalcula e o
+# método de atestação. Tudo o mais é trabalho interno e fica de fora.
+# =====================================================================
+
+# --- inteligência interna, nunca publicar -----------------------------
+interno_nao_publicar/
+00_CORRECOES.md
+01_licenca_e_base.md
+02_escopo.md
+03_nome.md
+04_fontes_indice_atraso.md
+05_bsee_nsta_indice_calculado.md
+06_ferro_ocioso_e_nsta.md
+07_provisao_aro_sec.md
+08_modelo_dados.md
+09_tee_e_lastro.md
+10_plano_e_veredito.md
+
+# --- planejamento, contratos de pronto e material comercial ----------
+PLANO_DE_ONDAS.md
+PRONTO.md
+PRONTO_trilha.md
+PENDENCIAS_ANTES_DE_PUBLICAR.md
+ONDA0_*.md
+ONDA1_*.md
+onda5_*
+
+# --- série editorial: estratégia, semáforo e datas de publicação -----
+11_posts_linkedin.html
+conferir_posts.py
+ver_post.py
+
+# --- capturas brutas: pesam ~0,8 MB por dia e crescem sem parar ------
+# As atas (o registro com os hashes) e os certificados SOBEM.
+# As respostas brutas do painel vão para o depósito versionado, que é o
+# lugar certo para arquivo que cresce, e não para o histórico do git.
+carimbo/historico/*/0*.json
+carimbo/historico/*/erro.json
+carimbo/historico/captura_log.txt
+
+# --- planilha derivada: regenerável por gerar_planilha.py ------------
+DIARIO_DESCOMISSIONAMENTO.xlsx
+
+# --- artefatos redundantes ou de bastidor da atestação ----------------
+# o pré-certificado é o mesmo conteúdo do -autocontido, sem a assinatura:
+# publicar os dois é ruído, o autocontido é o documento que importa.
+# as tentativas em modo local (CVM desligada) não são atestação nenhuma
+# e não têm lugar num repositório que prova rigor.
+**/*-precertificado.json
+**/TENTATIVAS_INVALIDAS_*.csv
+
+# --- ruído de ferramenta ---------------------------------------------
+__pycache__/
+*.pyc
+.venv/
+.vercel/
+*.tmp
+Thumbs.db
+desktop.ini

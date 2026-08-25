@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decommissioning Monitor</title>
+<meta name="description" content="The distance between decommissioning approved and decommissioning completed, measured from public registers in Brazil, the US, the UK and Norway. Every number reproducible from an open dataset.">
+<meta name="author" content="Tadeu Santana Cordeiro">
+<link rel="canonical" href="https://decommissioningmonitor.com/">
+<meta property="og:title" content="Decommissioning Monitor">
+<meta property="og:description" content="How long offshore structures wait between the end of life and the end of the structure, measured from public registers, reproducible by anyone.">
+<meta property="og:type" content="website">
+<link rel="icon" href="{{FAVICON}}">
+<style>
+  :root{
+    --bg:#f7f7f5; --card:#ffffff; --ink:#1a1a1a; --dim:#5c5c5c; --line:#e3e3df;
+    --acc:#0b5c4f; --acc-soft:#e6f2ef; --grey-bar:#b9b9b3; --on-acc:#ffffff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#14161a; --card:#1d2026; --ink:#ececed; --dim:#a3a4a8; --line:#31343a;
+      --acc:#5fd3ba; --acc-soft:#12362f; --grey-bar:#585c63; --on-acc:#06241d;
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--acc)}
+  .wrap{max-width:880px;margin:0 auto;padding:0 1.2rem}
+  header.top{border-bottom:1px solid var(--line);padding:.9rem 0;position:sticky;top:0;
+    background:var(--bg);z-index:5}
+  .bar{display:flex;align-items:center;gap:.8rem}
+  .mark{font-weight:800;letter-spacing:-.01em;font-size:1.05rem}
+  .mark small{display:block;font-weight:500;color:var(--dim);font-size:.72rem;letter-spacing:.02em}
+  .selo{width:30px;height:30px;flex:0 0 30px}
+  .creditos{display:flex;gap:1.1rem;align-items:flex-start;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:1.1rem 1.3rem;margin:1.4rem 0}
+  .creditos .selo{width:52px;height:52px;flex:0 0 52px;margin-top:.15rem}
+  .creditos p{margin:.25rem 0;font-size:.9rem}
+  .creditos .cit{font-size:.84rem;color:var(--dim);word-break:break-word}
+  .lang{margin-left:auto;display:flex;gap:.35rem}
+  .lang button{border:1px solid var(--line);background:var(--card);color:var(--ink);
+    padding:.3rem .7rem;border-radius:7px;cursor:pointer;font-size:.8rem;font-weight:600}
+  .lang button.on{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}
+  section{padding:2.6rem 0;border-bottom:1px solid var(--line)}
+  h1{font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.15;margin:.2rem 0 1rem;letter-spacing:-.015em}
+  h2{font-size:1.35rem;margin:0 0 1rem}
+  h3{font-size:1.02rem;margin:1.4rem 0 .5rem}
+  p{margin:.65rem 0}
+  .lead{font-size:1.08rem;color:var(--dim)}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.6rem 0}
+  .tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.2rem}
+  .tile b{display:block;font-size:1.9rem;letter-spacing:-.02em;color:var(--acc)}
+  .tile span{color:var(--dim);font-size:.88rem}
+  .note{background:var(--acc-soft);border-radius:10px;padding:1rem 1.2rem;font-size:.93rem;margin:1.2rem 0}
+  .limits li{margin:.5rem 0}
+  .chart{margin:1.4rem 0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.2rem;overflow-x:auto}
+  .chart svg{display:block;max-width:100%}
+  .src{font-size:.8rem;color:var(--dim)}
+  table{border-collapse:collapse;width:100%;font-size:.92rem;margin:.8rem 0}
+  th,td{text-align:left;padding:.45rem .6rem;border-bottom:1px solid var(--line)}
+  th{color:var(--dim);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  footer{padding:2.2rem 0 3.2rem;color:var(--dim);font-size:.85rem}
+  footer p{margin:.4rem 0}
+  .doi{display:inline-block;background:var(--acc);color:var(--on-acc);border-radius:6px;
+    padding:.15rem .55rem;font-size:.82rem;text-decoration:none;font-weight:600}
+  .mapgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:.8rem 0}
+  .mappanel{background:#0c1926;border-radius:12px;padding:14px 14px 8px;overflow:hidden}
+  .mappanel.wide{grid-column:1/-1}
+  .mappanel svg{display:block;width:100%;height:auto;max-height:560px;margin:0 auto}
+  .mappanel h3{margin:.1rem 0 .5rem;font-size:.95rem;color:#cfe0d9;font-weight:600}
+  .leg{font-size:.78rem;color:#8ba3b4;margin:.5rem 0 .3rem;line-height:1.9}
+  .dotk{display:inline-block;width:.65em;height:.65em;border-radius:50%;margin:0 .3em 0 .9em;vertical-align:baseline}
+  .leg .dotk:first-child{margin-left:0}
+  @media (max-width:640px){.mapgrid{grid-template-columns:1fr}}
+  .edt{width:100%;border-collapse:collapse;margin:.6rem 0}
+  .edt td,.edt th{padding:.35rem .5rem;border-bottom:1px solid var(--line,#d8e2de);font-size:.9rem}
+  .edt td:nth-child(2),.edt td:nth-child(3),.edt th:nth-child(2),.edt th:nth-child(3){text-align:right;font-variant-numeric:tabular-nums}
+  .edt tr.hl td{color:var(--acc);font-weight:700}
+  .edt tr.tot td{font-weight:700;border-top:2px solid var(--acc);border-bottom:none}
+  .edmeta{font-size:.8rem;opacity:.75;word-break:break-all}
+  [data-lang]{display:none}
+  html[data-show="en"] [data-lang="en"]{display:block}
+  html[data-show="pt"] [data-lang="pt"]{display:block}
+</style>
+<noscript><style>html [data-lang="en"]{display:block}</style></noscript>
+</head>
+<body>
+
+{{MAP_SYMBOLS}}
+
+<header class="top"><div class="wrap bar">
+  <svg class="selo" viewBox="0 0 64 64" role="img" aria-label="Veridis Engenharia e Tecnologia"><use href="#selo"/></svg>
+  <div class="mark">Decommissioning Monitor<small>by Veridis Engenharia</small></div>
+  <nav class="lang">
+    <button id="btn-en" onclick="setLang('en')">EN</button>
+    <button id="btn-pt" onclick="setLang('pt')">PT</button>
+  </nav>
+</div></header>
+
+<!-- ======================================================= ENGLISH -->
+<div data-lang="en"><div class="wrap">
+
+<section>
+  <h1>How long does an offshore structure wait between the end of its life and the end of the structure?</h1>
+  <p class="lead">This monitor measures the distance between "decommissioning approved" and "decommissioning completed", using only public registers, in Brazil, the US Gulf of Mexico, the United Kingdom and Norway. Every number on this page is recomputed from an open, permanently archived dataset before the page is built. If a number stops reproducing, the page refuses to build.</p>
+  <div class="tiles">
+    <div class="tile"><b>{{BR_AGU}}</b><span>Brazilian offshore installations classified by the regulator as awaiting decommissioning, median age {{BR_MED}} years</span></div>
+    <div class="tile"><b>{{US_OCIOSO}}</b><span>US Gulf structures still standing on leases already ended, median age {{US_OCIOSO_MED}} years</span></div>
+    <div class="tile"><b>{{ROWS_EN}}</b><span>rows of register data, archived with DOI and verified by {{CHECKS}} automated checks anyone can rerun</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>The map the registers draw</h2>
+  <p>No basemap, no tiles: every dot below is one structure from an official register, plotted by its own published coordinates. The continental shelf draws itself.</p>
+  <div class="mapgrid">
+    <div class="mappanel wide">
+      <h3>US Gulf of Mexico · BSEE register, {{MP_US_N_EN}} structures plotted</h3>
+      <svg viewBox="{{MAP_US_VB}}" role="img" aria-label="Dot map of US Gulf of Mexico structures"><use href="#map-us"/></svg>
+      <p class="leg"><span class="dotk" style="background:#3f4c59"></span>removed<span class="dotk" style="background:#2fa389"></span>standing, lease active<span class="dotk" style="background:#f0b53d"></span>standing, lease ended (idle iron)</p>
+    </div>
+    <div class="mappanel">
+      <h3>Brazilian coast · ANP register, {{MP_BR_N}} installations plotted</h3>
+      <svg viewBox="{{MAP_BR_VB}}" role="img" aria-label="Dot map of Brazilian offshore installations"><use href="#map-br"/></svg>
+      <p class="leg"><span class="dotk" style="background:#2fa389"></span>operating<span class="dotk" style="background:#f0b53d"></span>awaiting decommissioning<span class="dotk" style="background:#ee7f45"></span>under decommissioning<span class="dotk" style="background:#3f4c59"></span>decommissioned<span class="dotk" style="background:#4d6478"></span>other</p>
+    </div>
+    <div class="mappanel">
+      <h3>UK North Sea · NSTA register, {{MP_UK_N}} surface installations</h3>
+      <svg viewBox="{{MAP_UK_VB}}" role="img" aria-label="Dot map of UK offshore installations"><use href="#map-uk"/></svg>
+      <p class="leg"><span class="dotk" style="background:#2fa389"></span>active<span class="dotk" style="background:#f0b53d"></span>not in use / abandoned<span class="dotk" style="background:#3f4c59"></span>removed</p>
+    </div>
+  </div>
+  <p class="src">{{MP_US_SEM}} US structures and {{MP_BR_SEM}} Brazilian installations have no usable coordinates in the register and are counted in the statistics but absent from the map. Norway publishes lifecycle phases without coordinates in the extract used here, so it appears in the numbers, not on the map.</p>
+</section>
+
+<section>
+  <h2>How deep the backlog sits</h2>
+  <p>A dot map says where a structure is and throws away how deep it stands. Offshore work is priced in metres of water, and the registers carry that field. Below, every structure is placed at its own water depth, on a logarithmic scale. The bar is the median of each group.</p>
+  <div class="mappanel wide">
+    {{DEPTH_EN}}
+  </div>
+  <div class="note"><strong>What is waiting sits shallow, and what sits deep is still young.</strong> The {{BR_NAO_AGU_N}} Brazilian offshore installations outside the queue that carry a depth have a median of {{BR_NAO_AGU_MED}} metres. The {{BR_AGU}} awaiting decommissioning have a median of <strong>{{BR_AGU_MED}} metres</strong>, roughly {{RAZAO_LAM_EN}} times shallower, and {{BR_AGU_RASAS}} of them stand in less than 50 metres of water. Age explains it. Taking the three groups apart, with no installation counted twice: in 300 metres of water or more, the median installation is {{IDADE_FUNDO}} years old; in shallower water and still outside the queue, {{IDADE_RASO}} years; in the queue, {{IDADE_FILA}}. The liability waiting today is shallow because shallow iron is the oldest iron. The deepwater liability has not arrived yet.</div>
+  <p class="src">US Gulf idle iron sits at a median of {{FER_LAM_MED}} metres. Depth is present for every structure in the US register and for all {{BR_AGU}} Brazilian installations awaiting decommissioning. {{BR_SEM_LAM}} of the {{BR_TOTAL}} Brazilian installations carry the depth field zeroed rather than filled, and are absent from this panel: {{SEM_LAM_MOVEIS}} are mobile drilling units, which have no installation depth of their own, and {{SEM_LAM_OUTRAS}} is a floating production unit that does have one, with the field left at zero in the register. The two Brazilian columns are disjoint: no installation appears twice. Horizontal spread separates overlapping points and carries no meaning.</p>
+</section>
+
+<section>
+  <h2>The measure</h2>
+  <p>Two families of metric, never one blended number.</p>
+  <p><strong>Stock:</strong> how many structures sit in an end-of-life state right now, and for how long. This can be measured in all four jurisdictions.</p>
+  <p><strong>Cohort:</strong> how long a completed removal actually took. Only the US register publishes installation and removal dates in the same record, so the cohort baseline exists only there, and applying it elsewhere is a declared premise, not a measurement.</p>
+  <div class="chart">
+    <p style="margin:.1rem 0 .7rem"><strong>US Gulf of Mexico, in whole years:</strong> the median structure that was removed lived {{US_VIDA}} years. The median structure still standing on an ended lease is {{US_OCIOSO_MED}} years old. That is {{EXC_EN}} times longer.</p>
+    <svg viewBox="0 0 560 118" role="img" aria-label="Bar chart comparing the two medians">
+      <text x="0" y="12" font-size="12" fill="currentColor" opacity=".75">Removed cohort, median life</text>
+      <rect x="0" y="20" width="212" height="24" rx="4" fill="var(--grey-bar)"/>
+      <text x="220" y="37" font-size="14" font-weight="700" fill="currentColor">{{US_VIDA}} y</text>
+      <text x="0" y="76" font-size="12" fill="currentColor" opacity=".75">Still standing, lease ended, median age</text>
+      <rect x="0" y="84" width="524" height="24" rx="4" fill="var(--acc)"/>
+      <text x="478" y="101" font-size="14" font-weight="700" fill="var(--on-acc)">{{US_OCIOSO_MED}} y</text>
+    </svg>
+    <p class="src">Removal pace fell from {{RITMO_2010}} removals per year in the 2010s to {{RITMO_2020}} per year in the 2020s, annualised, while the standing stock aged.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Why Brazil is the centre of this</h2>
+  <p>The Brazilian regulator, ANP, publishes something rare: <strong>two dated stamps for the same case</strong>. The PDI is the approved decommissioning plan. The RDI is the report certifying the work as complete and accepted. Two fields, two dates, one public table. That pair makes execution time directly measurable, with no inference.</p>
+  <p>From the ANP register of {{BR_TOTAL}} offshore installations, extracted 12 August 2026:</p>
+  <div class="tiles">
+    <div class="tile"><b>{{BR_AGU}}</b><span>installations in the register state "permanently out of operation, awaiting decommissioning"; {{BR_FIXAS}} are fixed platforms, median age {{BR_MED}} years, all operated by Petrobras per the register</span></div>
+    <div class="tile"><b>{{BR_PEND}}</b><span>integral offshore decommissioning cases with an approved plan and no completion report, median {{BR_PEND_MED_EN}} years since approval; the oldest, Mexilhão in the Santos basin, since May 2016</span></div>
+  </div>
+  <p>The oldest waiting installation is <strong>Guaricema 1</strong>, in the Sergipe basin, in service since 1970. Its decommissioning plan was approved on 7 November 2024. The completion report has not yet been issued.</p>
+  <div class="note"><strong>What this is not.</strong> None of this is an accusation. Offshore decommissioning is heavy, expensive work that depends on weather windows and vessel availability; long timelines are the nature of the task. Only {{BR_CONCL}} integral offshore cycles have completed in the register, a sample too small for any baseline, so this monitor makes no claim about typical execution time in Brazil. And the ANP design deserves the credit stated above: it is what makes measurement possible at all. This monitor complements the official dashboard; it does not replace it.</div>
+</section>
+
+<section>
+  <h2>Weekly edition: Brazil, from the attested snapshot</h2>
+  <p>The numbers above are the permanently archived baseline. The table below is the living layer: it is recomputed from the most recent snapshot of the ANP panel whose record has already been attested in secure hardware (TEE), and it changes only when a new attested snapshot exists. Over the weeks, this becomes a time series of Brazilian decommissioning in which every point can be verified independently of the publisher.</p>
+  <table class="edt">
+    <tr><th>Situation in the register (offshore)</th><th>Installations</th><th>Δ</th></tr>
+    {{ED_TBODY_EN}}
+  </table>
+  <p>Decommissioning processes in the panel: <strong>{{ED_PDI_AP}}</strong> approved plans (PDI), <strong>{{ED_PDI_RE}}</strong> received and under review, <strong>{{ED_RDI_AP}}</strong> completion reports (RDI) approved. Most recent plan approval: {{ED_ULT_PDI_EN}}. Most recent completion approval: {{ED_ULT_RDI_EN}}.</p>
+  <p>{{ED_DELTA_EN}}</p>
+  <p class="edmeta">Edition of {{ED_DATE_EN}} · snapshot {{ED_SNAP}} · record SHA-256 {{ED_SHA12}}… · attested in secure hardware, verifiable independently of the issuer</p>
+</section>
+
+<section>
+  <h2>The United States, as comparison</h2>
+  <p>The BSEE register covers {{US_TOTAL_EN}} structures in the Gulf of Mexico: {{US_REM_EN}} already removed, {{US_PE_EN}} still standing. It is the only register of the four that publishes the full life cycle, and it also publishes the destination of removed structures:</p>
+  <table>
+    <tr><th>Destination after removal</th><th class="num">Structures</th></tr>
+    <tr><td>Taken to shore</td><td class="num">{{SHORE_EN}}</td></tr>
+    <tr><td>Not stated in the register</td><td class="num">1,830</td></tr>
+    <tr><td>Converted to artificial reef</td><td class="num">{{REEF}}</td></tr>
+    <tr><td>Reused</td><td class="num">{{REUSE}}</td></tr>
+  </table>
+  <p class="src">Matched by structure key, {{DEST_MATCH_EN}} of the {{US_REM_EN}} removed structures carry a destination record; {{SEM_DEST}} carry none, and one destination row matches no structure in the register.</p>
+  <p>The reef line matters for carbon accounting: steel reefed in place never reaches a steel mill, so it avoids no emissions. Any avoided-emissions figure for offshore scrap that does not exclude reefed structures is inflated.</p>
+  <p>On the financial side, {{ARO_EMP}} listed companies declared asset retirement obligations totalling US$ {{ARO_BI_EN}} billion in the December 2025 SEC frame, across all sectors, not only oil and gas. Declared provision is consolidated and global; it cannot be divided per structure.</p>
+</section>
+
+<section>
+  <h2>United Kingdom and Norway</h2>
+  <p>The UK register lists {{UK_TOTAL}} surface installations, of which {{UK_BACK}} are out of operation and still in the water. It is a current-state inventory: removed structures leave the register rather than staying marked, so it photographs the present rather than recording history.</p>
+  <p>Norway publishes the richest state machine of the four: {{NO_TOTAL}} fixed facilities across {{NO_FASES}} lifecycle states, including "abandoned in place" and "partly removed" as distinct states. Abandoned in place is not removed: it is a permanent, individually authorised presence, and collapsing the two inverts the meaning of any indicator.</p>
+</section>
+
+<section>
+  <h2>Data, method and verification</h2>
+  <p>Every number above comes from one archived snapshot, extracted 12 August 2026 and deposited with a permanent identifier:</p>
+  <p><a class="doi" href="https://doi.org/10.5281/zenodo.21919402">DOI 10.5281/zenodo.21919402</a>&nbsp; <span class="src">({{ROWS_EN}} rows, 8 datasets, sources and query parameters documented file by file)</span></p>
+  <p>The deposit ships with its own verifier: <code>python verificar.py</code> reruns {{CHECKS}} checks against the CSVs alone, no network, and exits non-zero if any published claim fails to reproduce. This page is generated by the same discipline: the build recomputes every figure and refuses to render on divergence.</p>
+  <p>Because the source dashboards change without public version history, the monitor also keeps a raw-snapshot routine over the ANP panel, started on 13 August 2026 and scheduled daily. Every server response is fixed by SHA-256 in a dated snapshot record; newer records also fix the hash of the record before them, chaining the series; and the records are attested in secure hardware (TEE) in periodic batches, verifiable independently of the issuer. Archived so far: {{SNAPS}} snapshots, {{SNAPS_CHAIN}} carrying the chain link, {{SNAPS_AT}} with the record already attested.</p>
+  <div class="creditos">
+    <svg class="selo" viewBox="0 0 64 64" role="img" aria-label="Veridis Engenharia e Tecnologia"><use href="#selo"/></svg>
+    <div>
+      <p><strong>Study and authorship.</strong> Research, method, dataset and this page are the work of <a href="https://veridisengenharia.com">Veridis Engenharia e Tecnologia</a>, produced from public registers with no paid subscription and no client commissioning the result.</p>
+      <p class="cit">Cite as: Cordeiro, T. S. (2026). <em>Decommissioning Monitor: offshore decommissioning datasets from Brazil, the US, the UK and Norway (2026-08-12 snapshot)</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21919402">https://doi.org/10.5281/zenodo.21919402</a> · CC BY 4.0, which allows reuse, including commercial, with attribution.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>What this data will not tell you</h2>
+  <ul class="limits">
+    <li><strong>Age is not delay.</strong> A structure on an ended lease is exactly that; extensions, agreements and disputes exist and do not appear in raw registers. Nothing here states non-compliance by anyone.</li>
+    <li><strong>Absence of declared provision is not absence of provision.</strong> Private companies do not file with the SEC, and companies under other accounting regimes never appear in that extract.</li>
+    <li><strong>Registers differ by design.</strong> Numbers from different jurisdictions are shown side by side, never summed, and no world total exists on this page because a world total would measure data availability, not decommissioning.</li>
+  </ul>
+</section>
+
+</div></div>
+
+<!-- ======================================================= PORTUGUÊS -->
+<div data-lang="pt"><div class="wrap">
+
+<section>
+  <h1>Quanto tempo uma estrutura offshore espera entre o fim da vida útil e o fim da estrutura?</h1>
+  <p class="lead">Este monitor mede a distância entre "descomissionamento aprovado" e "descomissionamento concluído", usando só registros públicos, no Brasil, no Golfo do México americano, no Reino Unido e na Noruega. Cada número desta página é recalculado do dataset aberto e arquivado antes de a página ser gerada. Se um número deixa de reproduzir, a página se recusa a compilar.</p>
+  <div class="tiles">
+    <div class="tile"><b>{{BR_AGU}}</b><span>instalações offshore brasileiras classificadas pelo regulador como aguardando descomissionamento, idade mediana de {{BR_MED}} anos</span></div>
+    <div class="tile"><b>{{US_OCIOSO}}</b><span>estruturas no Golfo americano de pé com o contrato de concessão já encerrado, idade mediana de {{US_OCIOSO_MED}} anos</span></div>
+    <div class="tile"><b>{{ROWS_PT}}</b><span>linhas de registro público, arquivadas com DOI e conferidas por {{CHECKS}} verificações automáticas que qualquer pessoa reexecuta</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>O mapa que os registros desenham</h2>
+  <p>Sem mapa de fundo, sem tiles: cada ponto abaixo é uma estrutura de um registro oficial, plotada pela própria coordenada publicada. A plataforma continental se desenha sozinha.</p>
+  <div class="mapgrid">
+    <div class="mappanel wide">
+      <h3>Golfo do México americano · registro BSEE, {{MP_US_N_PT}} estruturas plotadas</h3>
+      <svg viewBox="{{MAP_US_VB}}" role="img" aria-label="Mapa de pontos das estruturas do Golfo do México"><use href="#map-us"/></svg>
+      <p class="leg"><span class="dotk" style="background:#3f4c59"></span>removida<span class="dotk" style="background:#2fa389"></span>de pé, contrato ativo<span class="dotk" style="background:#f0b53d"></span>de pé, contrato encerrado (ferro ocioso)</p>
+    </div>
+    <div class="mappanel">
+      <h3>Costa brasileira · cadastro ANP, {{MP_BR_N}} instalações plotadas</h3>
+      <svg viewBox="{{MAP_BR_VB}}" role="img" aria-label="Mapa de pontos das instalações offshore brasileiras"><use href="#map-br"/></svg>
+      <p class="leg"><span class="dotk" style="background:#2fa389"></span>operando<span class="dotk" style="background:#f0b53d"></span>aguarda descomissionamento<span class="dotk" style="background:#ee7f45"></span>em descomissionamento<span class="dotk" style="background:#3f4c59"></span>descomissionada<span class="dotk" style="background:#4d6478"></span>outras</p>
+    </div>
+    <div class="mappanel">
+      <h3>Mar do Norte britânico · registro NSTA, {{MP_UK_N}} instalações de superfície</h3>
+      <svg viewBox="{{MAP_UK_VB}}" role="img" aria-label="Mapa de pontos das instalações britânicas"><use href="#map-uk"/></svg>
+      <p class="leg"><span class="dotk" style="background:#2fa389"></span>ativa<span class="dotk" style="background:#f0b53d"></span>fora de uso / abandonada<span class="dotk" style="background:#3f4c59"></span>removida</p>
+    </div>
+  </div>
+  <p class="src">{{MP_US_SEM}} estruturas americanas e {{MP_BR_SEM}} instalações brasileiras não têm coordenada utilizável no registro: contam nas estatísticas, mas não aparecem no mapa. A Noruega publica as fases de ciclo de vida sem coordenadas no extrato usado aqui, então entra nos números, não no mapa.</p>
+</section>
+
+<section>
+  <h2>Em que profundidade a fila está parada</h2>
+  <p>Mapa de pontos diz onde a estrutura está e joga fora em que lâmina ela está. Obra offshore se precifica em metros de água, e o campo existe nos registros. Abaixo, cada estrutura aparece na própria profundidade, em escala logarítmica. A barra é a mediana do grupo.</p>
+  <div class="mappanel wide">
+    {{DEPTH_PT}}
+  </div>
+  <div class="note"><strong>O que espera está no raso, e o que está no fundo ainda é novo.</strong> As {{BR_NAO_AGU_N}} instalações offshore brasileiras fora da fila que trazem lâmina têm mediana de {{BR_NAO_AGU_MED}} metros. As {{BR_AGU}} que aguardam descomissionamento têm mediana de <strong>{{BR_AGU_MED}} metros</strong>, cerca de {{RAZAO_LAM_PT}} vezes mais raso, e {{BR_AGU_RASAS}} delas estão em menos de 50 metros de água. A idade explica. Separando os três grupos, sem contar nenhuma instalação duas vezes: em 300 metros de lâmina ou mais, a instalação mediana tem {{IDADE_FUNDO}} anos; em água mais rasa e ainda fora da fila, tem {{IDADE_RASO}}; e na fila, {{IDADE_FILA}}. O passivo que espera hoje é de água rasa porque o ferro raso é o mais velho. O de água profunda ainda não chegou.</div>
+  <p class="src">O ferro ocioso do Golfo do México tem mediana de {{FER_LAM_MED}} metros. A lâmina existe em todas as estruturas do registro americano e nas {{BR_AGU}} brasileiras que aguardam descomissionamento. {{BR_SEM_LAM}} das {{BR_TOTAL}} instalações brasileiras trazem o campo zerado em vez de preenchido e ficaram fora deste painel: {{SEM_LAM_MOVEIS}} são unidades móveis de perfuração, que não têm lâmina própria de instalação, e {{SEM_LAM_OUTRAS}} é uma unidade flutuante de produção, que tem, e cujo campo está em zero no registro. As duas colunas brasileiras são disjuntas: nenhuma instalação aparece duas vezes. A dispersão horizontal serve para separar pontos que coincidem e não carrega significado.</p>
+</section>
+
+<section>
+  <h2>A medida</h2>
+  <p>Duas famílias de métrica, nunca um número único misturado.</p>
+  <p><strong>Estoque:</strong> quantas estruturas estão em estado de fim de vida agora, e há quanto tempo. Isso é mensurável nas quatro jurisdições.</p>
+  <p><strong>Coorte:</strong> quanto tempo uma remoção concluída de fato levou. Só o registro americano publica instalação e remoção no mesmo registro, então a linha de base de coorte existe só lá, e aplicá-la a outra bacia é premissa declarada, não medição.</p>
+  <div class="chart">
+    <p style="margin:.1rem 0 .7rem"><strong>Golfo do México americano, em anos inteiros:</strong> a estrutura mediana que foi removida viveu {{US_VIDA}} anos. A estrutura mediana ainda de pé em contrato encerrado tem {{US_OCIOSO_MED}} anos. É {{EXC_PT}} vezes mais.</p>
+    <svg viewBox="0 0 560 118" role="img" aria-label="Barras comparando as duas medianas">
+      <text x="0" y="12" font-size="12" fill="currentColor" opacity=".75">Coorte removida, vida mediana</text>
+      <rect x="0" y="20" width="212" height="24" rx="4" fill="var(--grey-bar)"/>
+      <text x="220" y="37" font-size="14" font-weight="700" fill="currentColor">{{US_VIDA}} anos</text>
+      <text x="0" y="76" font-size="12" fill="currentColor" opacity=".75">De pé, contrato encerrado, idade mediana</text>
+      <rect x="0" y="84" width="524" height="24" rx="4" fill="var(--acc)"/>
+      <text x="448" y="101" font-size="14" font-weight="700" fill="var(--on-acc)">{{US_OCIOSO_MED}} anos</text>
+    </svg>
+    <p class="src">O ritmo de remoção caiu de {{RITMO_2010}} por ano na década de 2010 para {{RITMO_2020}} por ano na de 2020, anualizado, enquanto o estoque envelhecia.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Por que o Brasil é o centro disto</h2>
+  <p>A ANP publica algo raro: <strong>dois carimbos datados para o mesmo caso</strong>. O PDI é o plano de descomissionamento aprovado. O RDI é o relatório que atesta a obra concluída e aceita. Dois campos, duas datas, uma tabela pública. Esse par torna o tempo de execução diretamente mensurável, sem inferência.</p>
+  <p>Do cadastro da ANP de {{BR_TOTAL}} instalações offshore, extraído em 12 de agosto de 2026:</p>
+  <div class="tiles">
+    <div class="tile"><b>{{BR_AGU}}</b><span>instalações na situação de registro "fora de operação permanentemente, aguarda descomissionamento"; {{BR_FIXAS}} são plataformas fixas, idade mediana de {{BR_MED}} anos, todas operadas pela Petrobras segundo o cadastro</span></div>
+    <div class="tile"><b>{{BR_PEND}}</b><span>processos integrais de descomissionamento no mar com plano aprovado e sem relatório de conclusão, mediana de {{BR_PEND_MED_PT}} anos desde a aprovação; o mais antigo, Mexilhão, na Bacia de Santos, desde maio de 2016</span></div>
+  </div>
+  <p>A instalação mais antiga em espera é a <strong>Guaricema 1</strong>, na Bacia de Sergipe, em serviço desde 1970. O plano de descomissionamento dela foi aprovado em 7 de novembro de 2024. O relatório de conclusão ainda não veio.</p>
+  <div class="note"><strong>O que isto não é.</strong> Nada aqui é acusação. Descomissionamento offshore é obra pesada e cara, dependente de janela de mar e de embarcação disponível; prazo longo é da natureza da tarefa. Só {{BR_CONCL}} ciclos integrais no mar constam concluídos no registro, amostra pequena demais para qualquer linha de base, e por isso este monitor não afirma tempo típico de execução no Brasil. E o desenho da ANP merece o crédito dito acima: é ele que torna a medição possível. Este monitor complementa o painel oficial; não o substitui.</div>
+</section>
+
+<section>
+  <h2>Edição semanal: Brasil, do snapshot atestado</h2>
+  <p>Os números acima são a linha de base arquivada permanentemente. A tabela abaixo é a camada viva: é recalculada do snapshot mais recente do painel da ANP cuja ata já foi atestada em hardware seguro (TEE), e só muda quando existe snapshot atestado novo. Com as semanas, isto vira uma série temporal do descomissionamento brasileiro em que cada ponto pode ser verificado de forma independente do emissor.</p>
+  <table class="edt">
+    <tr><th>Situação no cadastro (offshore)</th><th>Instalações</th><th>Δ</th></tr>
+    {{ED_TBODY_PT}}
+  </table>
+  <p>Processos de descomissionamento no painel: <strong>{{ED_PDI_AP}}</strong> planos aprovados (PDI), <strong>{{ED_PDI_RE}}</strong> recebidos em análise, <strong>{{ED_RDI_AP}}</strong> relatórios de conclusão (RDI) aprovados. Aprovação de plano mais recente: {{ED_ULT_PDI_PT}}. Aprovação de conclusão mais recente: {{ED_ULT_RDI_PT}}.</p>
+  <p>{{ED_DELTA_PT}}</p>
+  <p class="edmeta">Edição de {{ED_DATE_PT}} · snapshot {{ED_SNAP}} · ata SHA-256 {{ED_SHA12}}… · atestada em hardware seguro, com verificação independente do emissor</p>
+</section>
+
+<section>
+  <h2>Os Estados Unidos, como comparação</h2>
+  <p>O cadastro do BSEE cobre {{US_TOTAL_PT}} estruturas no Golfo do México: {{US_REM_PT}} já removidas, {{US_PE_PT}} ainda de pé. É o único dos quatro registros que publica o ciclo de vida completo, e publica também o destino das estruturas removidas:</p>
+  <table>
+    <tr><th>Destino após a remoção</th><th class="num">Estruturas</th></tr>
+    <tr><td>Levada para terra</td><td class="num">{{SHORE_PT}}</td></tr>
+    <tr><td>Não informado no registro</td><td class="num">1.830</td></tr>
+    <tr><td>Convertida em recife artificial</td><td class="num">{{REEF}}</td></tr>
+    <tr><td>Reutilizada</td><td class="num">{{REUSE}}</td></tr>
+  </table>
+  <p class="src">Cruzando pela chave da estrutura, {{DEST_MATCH_PT}} das {{US_REM_PT}} removidas têm registro de destino; {{SEM_DEST}} não têm, e uma linha de destino não corresponde a estrutura nenhuma do cadastro.</p>
+  <p>A linha do recife importa para a contabilidade de carbono: aço recifado nunca chega a uma siderúrgica, então não evita emissão nenhuma. Qualquer número de emissão evitada de sucata offshore que não exclua estrutura recifada está inflado.</p>
+  <p>No lado financeiro, {{ARO_EMP}} companhias listadas declararam provisões de desmobilização somando US$ {{ARO_BI_PT}} bilhões no quadro de dezembro de 2025 da SEC, em todos os setores, não só óleo e gás. Provisão declarada é consolidada e global; não se divide por estrutura.</p>
+</section>
+
+<section>
+  <h2>Reino Unido e Noruega</h2>
+  <p>O registro britânico lista {{UK_TOTAL}} instalações de superfície, das quais {{UK_BACK}} estão fora de operação e ainda na água. É um inventário do presente: estrutura removida sai do registro em vez de ficar marcada, então ele fotografa o agora em vez de guardar história.</p>
+  <p>A Noruega publica a máquina de estados mais rica das quatro: {{NO_TOTAL}} instalações fixas em {{NO_FASES}} estados de ciclo de vida, incluindo "abandonada no local" e "parcialmente removida" como estados distintos. Abandonada no local não é removida: é presença permanente autorizada caso a caso, e colapsar os dois inverte o sentido de qualquer indicador.</p>
+</section>
+
+<section>
+  <h2>Dado, método e verificação</h2>
+  <p>Todo número acima vem de um único snapshot arquivado, extraído em 12 de agosto de 2026 e depositado com identificador permanente:</p>
+  <p><a class="doi" href="https://doi.org/10.5281/zenodo.21919402">DOI 10.5281/zenodo.21919402</a>&nbsp; <span class="src">({{ROWS_PT}} linhas, 8 bases, fontes e parâmetros de consulta documentados arquivo a arquivo)</span></p>
+  <p>O depósito carrega o próprio verificador: <code>python verificar.py</code> reexecuta {{CHECKS}} verificações contra os CSVs, sem rede, e sai com erro se qualquer afirmação publicada deixar de reproduzir. Esta página é gerada com a mesma disciplina: o build recalcula cada número e se recusa a renderizar em caso de divergência.</p>
+  <p>Como os painéis de origem mudam sem histórico público de versões, o monitor também mantém uma rotina de snapshot bruto do painel da ANP, iniciada em 13 de agosto de 2026 e agendada diariamente. Cada resposta do servidor é fixada por SHA-256 numa ata datada; as atas mais novas registram também o hash da ata anterior, encadeando a série; e as atas são atestadas em hardware seguro (TEE) em lotes periódicos, com verificação independente do emissor. Arquivado até agora: {{SNAPS}} snapshots, {{SNAPS_CHAIN}} com o elo da cadeia, {{SNAPS_AT}} com a ata já atestada.</p>
+  <div class="creditos">
+    <svg class="selo" viewBox="0 0 64 64" role="img" aria-label="Veridis Engenharia e Tecnologia"><use href="#selo"/></svg>
+    <div>
+      <p><strong>Estudo e autoria.</strong> A pesquisa, o método, a base e esta página são trabalho da <a href="https://veridisengenharia.com">Veridis Engenharia e Tecnologia</a>, feitos a partir de registro público, sem assinatura paga e sem cliente encomendando o resultado.</p>
+      <p class="cit">Como citar: Cordeiro, T. S. (2026). <em>Decommissioning Monitor: offshore decommissioning datasets from Brazil, the US, the UK and Norway (2026-08-12 snapshot)</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21919402">https://doi.org/10.5281/zenodo.21919402</a> · CC BY 4.0, que permite reuso, inclusive comercial, com atribuição.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>O que este dado não vai te dizer</h2>
+  <ul class="limits">
+    <li><strong>Idade não é atraso.</strong> Estrutura em contrato encerrado é exatamente isso; prorrogações, acordos e disputas existem e não aparecem em registro bruto. Nada aqui afirma descumprimento de ninguém.</li>
+    <li><strong>Ausência de provisão declarada não é ausência de provisão.</strong> Empresa fechada não declara à SEC, e quem reporta sob outro regime contábil nunca aparece naquele extrato.</li>
+    <li><strong>Registros diferem por desenho.</strong> Números de jurisdições diferentes aparecem lado a lado, nunca somados, e não existe total mundial nesta página, porque um total mundial mediria disponibilidade de dado, não descomissionamento.</li>
+  </ul>
+</section>
+
+</div></div>
+
+<footer><div class="wrap">
+  <div data-lang="en">
+    <p>Sources: ANP (Painel Dinâmico de Descomissionamento, published under Art. 14 of ANP Resolution 817/2020), BSEE, SEC, North Sea Transition Authority, Sokkeldirektoratet.</p>
+    <p>Contains data under the Norwegian Licence for Open Government Data (NLOD), distributed by Sokkeldirektoratet. Contains information provided by the North Sea Transition Authority, licensed under the Open Government Licence v3.0.</p>
+  <p>Compilation licensed CC BY 4.0 · dataset and methods at the DOI above · page generated {{GERADO_UTC}} from the deposited extraction of 12 August 2026, which covers all four registers named above. The daily raw-capture routine described in the method section covers the ANP panel only.</p>
+    <p>© 2026 <a href="https://veridisengenharia.com">Veridis Engenharia</a></p>
+  </div>
+  <div data-lang="pt">
+    <p>Fontes: ANP (Painel Dinâmico de Descomissionamento, publicidade determinada pelo art. 14 da Resolução ANP 817/2020), BSEE, SEC, North Sea Transition Authority, Sokkeldirektoratet.</p>
+    <p>Contém dados sob a Licença Norueguesa para Dados Abertos de Governo (NLOD), distribuídos pelo Sokkeldirektoratet. Contém informação fornecida pela North Sea Transition Authority, sob a Open Government Licence v3.0.</p>
+  <p>Compilação sob CC BY 4.0 · dataset e método no DOI acima · página gerada em {{GERADO_UTC}} a partir da extração depositada de 12 de agosto de 2026, que cobre os quatro registros citados acima. A rotina diária de captura bruta descrita na seção de método cobre apenas o painel da ANP.</p>
+    <p>© 2026 <a href="https://veridisengenharia.com">Veridis Engenharia</a></p>
+  </div>
+</div></footer>
+
+<script>
+function setLang(l){
+  document.documentElement.setAttribute('data-show', l);
+  document.documentElement.lang = (l === 'pt' ? 'pt-BR' : 'en');
+  document.getElementById('btn-en').classList.toggle('on', l === 'en');
+  document.getElementById('btn-pt').classList.toggle('on', l === 'pt');
+  try { localStorage.setItem('dm-lang', l); } catch(e) {}
+}
+(function(){
+  var salvo = null;
+  try { salvo = localStorage.getItem('dm-lang'); } catch(e) {}
+  var nav = (navigator.language || 'en').toLowerCase();
+  setLang(salvo || (nav.indexOf('pt') === 0 ? 'pt' : 'en'));
+})();
+</script>
+</body>
+</html>

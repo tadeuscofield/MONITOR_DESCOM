@@ -1,0 +1,132 @@
+{
+  "alvo": {
+    "base_legal_publicidade": "Resolução ANP nº 817/2020, art. 14",
+    "dataset_id": "bddf5cdf-84f2-44dc-9dde-91e9afa6bf60",
+    "host": "wabi-brazil-south-d-primary-api.analysis.windows.net",
+    "model_id": 433277,
+    "orgao": "Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP)",
+    "painel": "Painel Dinâmico de Descomissionamento de Instalações de Exploração e Produção",
+    "report_id": "518fe871-a3bd-4ef1-9d34-6494ba1e4143",
+    "resource_key": "f1e1b408-5cb4-496e-b74d-8c724088c130"
+  },
+  "arquivos": [
+    {
+      "arquivo": "00_modelsAndExploration.json",
+      "carimbos_do_painel_utc": [],
+      "descricao": "estrutura do relatório e carimbos de atualização do painel",
+      "requisicao": {
+        "metodo": "GET",
+        "url": "https://wabi-brazil-south-d-primary-api.analysis.windows.net/public/reports/f1e1b408-5cb4-496e-b74d-8c724088c130/modelsAndExploration?preferReadOnlySession=true"
+      },
+      "resposta": {
+        "bytes": 177943,
+        "content_type": "application/json; charset=utf-8",
+        "date_servidor": "Mon, 24 Aug 2026 14:30:01 GMT",
+        "sha256": "bef356186112ad9d3c6b69ea1f5205e3c3498382a0ae8997faaf5f7648e1499e",
+        "status": 200
+      },
+      "sanidade": "sem lastRefreshTime"
+    },
+    {
+      "arquivo": "01_DESCOMISSIONAMENTO_PROCESSOS.json",
+      "descricao": "resposta bruta querydata da tabela DESCOMISSIONAMENTO_PROCESSOS",
+      "requisicao": {
+        "corpo": "{\"version\":\"1.0.0\",\"queries\":[{\"Query\":{\"Commands\":[{\"SemanticQueryDataShapeCommand\":{\"Query\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"DESCOMISSIONAMENTO_PROCESSOS\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"PROTOCOLO\"},\"Name\":\"DESCOMISSIONAMENTO_PROCESSOS.PROTOCOLO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"ANO_PROTOCOLO\"},\"Name\":\"DESCOMISSIONAMENTO_PROCESSOS.ANO_PROTOCOLO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DSC_TIPO_PDI\"},\"Name\":\"DESCOMISSIONAMENTO_PROCESSOS.DSC_TIPO_PDI\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DSC_MODALIDADE_PDI\"},\"Name\":\"DESCOMISSIONAMENTO_PROCESSOS.DSC_MODALIDADE_PDI\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"STATUS_PDI\"},\"Name\":\"DESCOMISSIONAMENTO_PROCESSOS.STATUS_PDI\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DAT_APROVACAO_PDI\"},\"Name\":\"DESCOMISSIONAMENTO_PROCESSOS.DAT_APROVACAO_PDI\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DAT_INICIO_DECOM\"},\"Name\":\"DESCOMISSIONAMENTO_PROCESSOS.DAT_INICIO_DECOM\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DAT_ENCERRAMENTO_SEM_APROV_PDI\"},\"Name\":\"DESCOMISSIONAMENTO_PROCESSOS.DAT_ENCERRAMENTO_SEM_APROV_PDI\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DAT_SOBRESTAMENTO\"},\"Name\":\"DESCOMISSIONAMENTO_PROCESSOS.DAT_SOBRESTAMENTO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"STATUS_RDI\"},\"Name\":\"DESCOMISSIONAMENTO_PROCESSOS.STATUS_RDI\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DAT_INICIO_RDI\"},\"Name\":\"DESCOMISSIONAMENTO_PROCESSOS.DAT_INICIO_RDI\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DAT_APROVACAO_RDI\"},\"Name\":\"DESCOMISSIONAMENTO_PROCESSOS.DAT_APROVACAO_RDI\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DSC_FONTE\"},\"Name\":\"DESCOMISSIONAMENTO_PROCESSOS.DSC_FONTE\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DSC_DETALHE_EVENTO\"},\"Name\":\"DESCOMISSIONAMENTO_PROCESSOS.DSC_DETALHE_EVENTO\"}]},\"Binding\":{\"Primary\":{\"Groupings\":[{\"Projections\":[0,1,2,3,4,5,6,7,8,9,10,11,12,13]}]},\"DataReduction\":{\"DataVolume\":4,\"Primary\":{\"Window\":{\"Count\":30000}}},\"Version\":1}}}]},\"QueryId\":\"\",\"ApplicationContext\":{\"DatasetId\":\"bddf5cdf-84f2-44dc-9dde-91e9afa6bf60\",\"Sources\":[{\"ReportId\":\"518fe871-a3bd-4ef1-9d34-6494ba1e4143\",\"VisualId\":\"\"}]}}],\"cancelQueries\":[],\"modelId\":433277}",
+        "corpo_sha256": "c9ab0ea09b1fc589a8c4b2f04563b10f304d74380c6369d0e9f92c1fa5cb0cd9",
+        "metodo": "POST",
+        "url": "https://wabi-brazil-south-d-primary-api.analysis.windows.net/public/reports/querydata?synchronous=true"
+      },
+      "resposta": {
+        "bytes": 20632,
+        "content_type": "text/plain; charset=utf-8",
+        "date_servidor": "Mon, 24 Aug 2026 14:30:02 GMT",
+        "sha256": "86a9aaad5ffeacf25c5d485743726ca3473d513cde5a4e3c304f742e4353b892",
+        "status": 200
+      },
+      "sanidade": "ok"
+    },
+    {
+      "arquivo": "02_INSTALACAO.json",
+      "descricao": "resposta bruta querydata da tabela INSTALACAO",
+      "requisicao": {
+        "corpo": "{\"version\":\"1.0.0\",\"queries\":[{\"Query\":{\"Commands\":[{\"SemanticQueryDataShapeCommand\":{\"Query\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"INSTALACAO\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NOM_IDENTIFICACAO\"},\"Name\":\"INSTALACAO.NOM_IDENTIFICACAO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"SIG_INSTALACAO\"},\"Name\":\"INSTALACAO.SIG_INSTALACAO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DSC_CLASSIFICACAO_INSTO\"},\"Name\":\"INSTALACAO.DSC_CLASSIFICACAO_INSTO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DSC_CLASSIFICACAO_UPSTREAM\"},\"Name\":\"INSTALACAO.DSC_CLASSIFICACAO_UPSTREAM\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NOM_AMBIENTE\"},\"Name\":\"INSTALACAO.NOM_AMBIENTE\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NOM_CAMPO\"},\"Name\":\"INSTALACAO.NOM_CAMPO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NOM_OPERADOR_INSTALACAO_GRUPO\"},\"Name\":\"INSTALACAO.NOM_OPERADOR_INSTALACAO_GRUPO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NOM_OPERADOR_CONCESSAO\"},\"Name\":\"INSTALACAO.NOM_OPERADOR_CONCESSAO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DSC_SITUACAO\"},\"Name\":\"INSTALACAO.DSC_SITUACAO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DSC_STATUS_OPERACAO\"},\"Name\":\"INSTALACAO.DSC_STATUS_OPERACAO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"MED_LAMINA_DAGUA\"},\"Name\":\"INSTALACAO.MED_LAMINA_DAGUA\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NUM_ANO_INICIO_OPERACAO\"},\"Name\":\"INSTALACAO.NUM_ANO_INICIO_OPERACAO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NUM_IDADE\"},\"Name\":\"INSTALACAO.NUM_IDADE\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DSC_IDADE_CATEGORIA\"},\"Name\":\"INSTALACAO.DSC_IDADE_CATEGORIA\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"MED_LAT_ULTIMA_POSICAO\"},\"Name\":\"INSTALACAO.MED_LAT_ULTIMA_POSICAO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"MED_LONG_ULTIMA_POSICAO\"},\"Name\":\"INSTALACAO.MED_LONG_ULTIMA_POSICAO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"DSC_DESCOMISSIONADO_PAT\"},\"Name\":\"INSTALACAO.DSC_DESCOMISSIONADO_PAT\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"FONTE_DESCOMISSIONAMENTO\"},\"Name\":\"INSTALACAO.FONTE_DESCOMISSIONAMENTO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NOM_UF\"},\"Name\":\"INSTALACAO.NOM_UF\"}]},\"Binding\":{\"Primary\":{\"Groupings\":[{\"Projections\":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]}]},\"DataReduction\":{\"DataVolume\":4,\"Primary\":{\"Window\":{\"Count\":30000}}},\"Version\":1}}}]},\"QueryId\":\"\",\"ApplicationContext\":{\"DatasetId\":\"bddf5cdf-84f2-44dc-9dde-91e9afa6bf60\",\"Sources\":[{\"ReportId\":\"518fe871-a3bd-4ef1-9d34-6494ba1e4143\",\"VisualId\":\"\"}]}}],\"cancelQueries\":[],\"modelId\":433277}",
+        "corpo_sha256": "76c050ad1686631c1aa72f5c3622d0975d3852fd6e994df04efc5185df3c3921",
+        "metodo": "POST",
+        "url": "https://wabi-brazil-south-d-primary-api.analysis.windows.net/public/reports/querydata?synchronous=true"
+      },
+      "resposta": {
+        "bytes": 169034,
+        "content_type": "text/plain; charset=utf-8",
+        "date_servidor": "Mon, 24 Aug 2026 14:30:03 GMT",
+        "sha256": "3a030abf74a60afb026dc6b55c50b55f87bb790d3d6e8011480e746b24f5dd16",
+        "status": 200
+      },
+      "sanidade": "ok"
+    },
+    {
+      "arquivo": "03_PAT_ATIVIDADES_PREVISTO.json",
+      "descricao": "resposta bruta querydata da tabela PAT_ATIVIDADES_PREVISTO",
+      "requisicao": {
+        "corpo": "{\"version\":\"1.0.0\",\"queries\":[{\"Query\":{\"Commands\":[{\"SemanticQueryDataShapeCommand\":{\"Query\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"PAT_ATIVIDADES_PREVISTO\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"COD_CAMPO\"},\"Name\":\"PAT_ATIVIDADES_PREVISTO.COD_CAMPO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NUM_ANO_REFERENCIA\"},\"Name\":\"PAT_ATIVIDADES_PREVISTO.NUM_ANO_REFERENCIA\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"COD_REVISAO_PAT\"},\"Name\":\"PAT_ATIVIDADES_PREVISTO.COD_REVISAO_PAT\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"ULTIMA_REVISAO\"},\"Name\":\"PAT_ATIVIDADES_PREVISTO.ULTIMA_REVISAO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NUM_ANO\"},\"Name\":\"PAT_ATIVIDADES_PREVISTO.NUM_ANO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NOM_TIPO_ATIVIDADE\"},\"Name\":\"PAT_ATIVIDADES_PREVISTO.NOM_TIPO_ATIVIDADE\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"QTD_ATIVIDADE_FISICA\"},\"Name\":\"PAT_ATIVIDADES_PREVISTO.QTD_ATIVIDADE_FISICA\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NOM_UNIDADE\"},\"Name\":\"PAT_ATIVIDADES_PREVISTO.NOM_UNIDADE\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"INVESTIMENTO [R$]\"},\"Name\":\"PAT_ATIVIDADES_PREVISTO.INVESTIMENTO [R$]\"}]},\"Binding\":{\"Primary\":{\"Groupings\":[{\"Projections\":[0,1,2,3,4,5,6,7,8]}]},\"DataReduction\":{\"DataVolume\":4,\"Primary\":{\"Window\":{\"Count\":30000}}},\"Version\":1}}}]},\"QueryId\":\"\",\"ApplicationContext\":{\"DatasetId\":\"bddf5cdf-84f2-44dc-9dde-91e9afa6bf60\",\"Sources\":[{\"ReportId\":\"518fe871-a3bd-4ef1-9d34-6494ba1e4143\",\"VisualId\":\"\"}]}}],\"cancelQueries\":[],\"modelId\":433277}",
+        "corpo_sha256": "fc4b0be282543de4e1e69f5ac70955d53e08b315386ac801b393e97fbf8e76e2",
+        "metodo": "POST",
+        "url": "https://wabi-brazil-south-d-primary-api.analysis.windows.net/public/reports/querydata?synchronous=true"
+      },
+      "resposta": {
+        "bytes": 105899,
+        "content_type": "text/plain; charset=utf-8",
+        "date_servidor": "Mon, 24 Aug 2026 14:30:04 GMT",
+        "sha256": "24a431af4533f1388224278b9ef4331e273c9676d6712be6f76048146441e0fd",
+        "status": 200
+      },
+      "sanidade": "ok"
+    },
+    {
+      "arquivo": "04_PAT_DADOS_GERAIS_PREVISTO.json",
+      "descricao": "resposta bruta querydata da tabela PAT_DADOS_GERAIS_PREVISTO",
+      "requisicao": {
+        "corpo": "{\"version\":\"1.0.0\",\"queries\":[{\"Query\":{\"Commands\":[{\"SemanticQueryDataShapeCommand\":{\"Query\":{\"Version\":2,\"From\":[{\"Name\":\"t\",\"Entity\":\"PAT_DADOS_GERAIS_PREVISTO\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"COD_CAMPO\"},\"Name\":\"PAT_DADOS_GERAIS_PREVISTO.COD_CAMPO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NUM_ANO_REFERENCIA\"},\"Name\":\"PAT_DADOS_GERAIS_PREVISTO.NUM_ANO_REFERENCIA\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"COD_REVISAO_PAT\"},\"Name\":\"PAT_DADOS_GERAIS_PREVISTO.COD_REVISAO_PAT\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"ULTIMA_REVISAO\"},\"Name\":\"PAT_DADOS_GERAIS_PREVISTO.ULTIMA_REVISAO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NOM_CAMPO\"},\"Name\":\"PAT_DADOS_GERAIS_PREVISTO.NOM_CAMPO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"TERRA_MAR\"},\"Name\":\"PAT_DADOS_GERAIS_PREVISTO.TERRA_MAR\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NOM_BACIA\"},\"Name\":\"PAT_DADOS_GERAIS_PREVISTO.NOM_BACIA\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"NOM_ESTADO\"},\"Name\":\"PAT_DADOS_GERAIS_PREVISTO.NOM_ESTADO\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"STATUS_DESCOM\"},\"Name\":\"PAT_DADOS_GERAIS_PREVISTO.STATUS_DESCOM\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"VAL_DESCOMISSIONAMENTO_ANALISE\"},\"Name\":\"PAT_DADOS_GERAIS_PREVISTO.VAL_DESCOMISSIONAMENTO_ANALISE\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"t\"}},\"Property\":\"MOEDA_ANALISE\"},\"Name\":\"PAT_DADOS_GERAIS_PREVISTO.MOEDA_ANALISE\"}]},\"Binding\":{\"Primary\":{\"Groupings\":[{\"Projections\":[0,1,2,3,4,5,6,7,8,9,10]}]},\"DataReduction\":{\"DataVolume\":4,\"Primary\":{\"Window\":{\"Count\":30000}}},\"Version\":1}}}]},\"QueryId\":\"\",\"ApplicationContext\":{\"DatasetId\":\"bddf5cdf-84f2-44dc-9dde-91e9afa6bf60\",\"Sources\":[{\"ReportId\":\"518fe871-a3bd-4ef1-9d34-6494ba1e4143\",\"VisualId\":\"\"}]}}],\"cancelQueries\":[],\"modelId\":433277}",
+        "corpo_sha256": "c19b8a7374534000fd7ccec895abb73c5d9eb2a1b2c560638189c5ed461f05c9",
+        "metodo": "POST",
+        "url": "https://wabi-brazil-south-d-primary-api.analysis.windows.net/public/reports/querydata?synchronous=true"
+      },
+      "resposta": {
+        "bytes": 24733,
+        "content_type": "text/plain; charset=utf-8",
+        "date_servidor": "Mon, 24 Aug 2026 14:30:04 GMT",
+        "sha256": "b4af4e0475940187320d25bc1252d9e0c03a8e726c6e9e5029138a77ab6b2359",
+        "status": 200
+      },
+      "sanidade": "ok"
+    }
+  ],
+  "autor": "Tadeu Santana Cordeiro (Veridis Engenharia)",
+  "cadeia": {
+    "ata_anterior_sha256": "0f930d6556a94481925f541619c08cbb606400a8000b88fb7b39a387200b793f",
+    "snapshot_anterior": "anp_20260823_143002Z"
+  },
+  "captura": {
+    "completa": true,
+    "falhas": [],
+    "fim_utc": "2026-08-24T14:30:06Z",
+    "inicio_utc": "2026-08-24T14:30:03Z"
+  },
+  "contexto": {
+    "deposito_relacionado": "https://doi.org/10.5281/zenodo.21919402",
+    "motivo": "O painel atualiza sem histórico público de versões e a chave do relatório muda quando republicado; sem snapshot carimbado, o conteúdo de uma data passada é irrecuperável."
+  },
+  "evidencia_de_tempo": {
+    "carimbos_do_painel_utc": [],
+    "date_dos_servidores": [
+      "Mon, 24 Aug 2026 14:30:01 GMT",
+      "Mon, 24 Aug 2026 14:30:02 GMT",
+      "Mon, 24 Aug 2026 14:30:03 GMT",
+      "Mon, 24 Aug 2026 14:30:04 GMT"
+    ],
+    "nota": "O Date é do servidor que serviu a resposta (terceiro); os carimbos do painel são os lastRefresh/nextRefresh publicados pelo próprio relatório.",
+    "relogio_local_utc": "2026-08-24T14:30:03Z"
+  },
+  "formato": "carimbo-anp/1",
+  "o_que_este_carimbo_prova": "Que os arquivos listados, com estes SHA-256, foram servidos pela API pública do painel em resposta às requisições registradas. Não afirma correção do dado da ANP nem substitui o painel.",
+  "servico": "Decommissioning Monitor — carimbo de snapshot regulatório"
+}

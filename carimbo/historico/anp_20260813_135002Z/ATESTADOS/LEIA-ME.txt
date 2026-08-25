@@ -1,0 +1,11 @@
+Este lote foi emitido em 13/08/2026.
+
+lote_manifesto.csv contem SOMENTE as atestacoes em hardware, finalizadas
+e verificadas (5 carimbos, exit 0).
+
+TENTATIVAS_INVALIDAS_cvm_desligada.csv guarda duas tentativas anteriores
+feitas com a maquina de atestacao desligada. Elas NAO tem quote, NAO sao
+atestacao e os links delas nao provam nada. Ficam registradas por honestidade
+de processo, e nunca devem ser distribuidas como certificado.
+
+O certificado valido e ata_snapshot-autocontido.json.

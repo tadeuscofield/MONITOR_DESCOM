@@ -1,0 +1,24 @@
+{
+  "snapshot": "anp_20260813_135002Z",
+  "captura_utc": "2026-08-13T13:50:02Z",
+  "painel_refresh_utc": "",
+  "total_offshore": 253,
+  "total_processos": 190,
+  "ciclo": {
+    "operando": 93,
+    "extensao_vida": 11,
+    "aguarda_descom": 35,
+    "em_descom": 15,
+    "descomissionada": 14,
+    "hibernacao": 7,
+    "em_construcao": 8,
+    "outras": 70
+  },
+  "pdi_aprovados": 123,
+  "pdi_recebidos": 26,
+  "rdi_aprovados": 40,
+  "ultima_aprovacao_pdi": "2026-07-27",
+  "ultima_aprovacao_rdi": "2025-03-17",
+  "ata_sha256": "9a0b5e12cb6187da2f2f61f0420d4d55b96f20f584cfca313f66dfa97ff9d5d2",
+  "delta": {}
+}
