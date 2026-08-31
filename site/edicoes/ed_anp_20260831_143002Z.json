@@ -1,0 +1,38 @@
+{
+  "snapshot": "anp_20260831_143002Z",
+  "captura_utc": "2026-08-31T14:30:02Z",
+  "painel_refresh_utc": "",
+  "total_offshore": 254,
+  "total_processos": 190,
+  "ciclo": {
+    "operando": 91,
+    "extensao_vida": 11,
+    "aguarda_descom": 35,
+    "em_descom": 15,
+    "descomissionada": 14,
+    "hibernacao": 8,
+    "em_construcao": 9,
+    "outras": 71
+  },
+  "pdi_aprovados": 124,
+  "pdi_recebidos": 25,
+  "rdi_aprovados": 40,
+  "ultima_aprovacao_pdi": "2026-08-12",
+  "ultima_aprovacao_rdi": "2025-03-17",
+  "ata_sha256": "735b1d16965647a00cc553f0aa0f7320c6b1e896f604d2346a404fafc5dc7c98",
+  "delta_contra": "anp_20260819_143003Z",
+  "delta": {
+    "total_offshore": 1,
+    "pdi_aprovados": 0,
+    "pdi_recebidos": 0,
+    "rdi_aprovados": 0,
+    "ciclo.operando": -2,
+    "ciclo.extensao_vida": 0,
+    "ciclo.aguarda_descom": 0,
+    "ciclo.em_descom": 0,
+    "ciclo.descomissionada": 0,
+    "ciclo.hibernacao": 1,
+    "ciclo.em_construcao": 1,
+    "ciclo.outras": 1
+  }
+}

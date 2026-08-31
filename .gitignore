@@ -18,6 +18,9 @@ interno_nao_publicar/
 09_tee_e_lastro.md
 10_plano_e_veredito.md
 
+# --- runbook interno: nomeia arquivos gitignorados, fica de fora ------
+CLAUDE.md
+
 # --- planejamento, contratos de pronto e material comercial ----------
 PLANO_DE_ONDAS.md
 PRONTO.md
