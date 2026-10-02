@@ -85,6 +85,15 @@
   [data-lang]{display:none}
   html[data-show="en"] [data-lang="en"]{display:block}
   html[data-show="pt"] [data-lang="pt"]{display:block}
+  html[data-show="en"] span[data-lang="en"]{display:inline}
+  html[data-show="pt"] span[data-lang="pt"]{display:inline}
+  .abas{display:flex;gap:.35rem;margin-top:.6rem}
+  .aba{font-size:.82rem;font-weight:600;padding:.28rem .8rem;border:1px solid var(--line);
+    border-radius:7px;background:var(--card);color:var(--ink)}
+  .aba.on{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}
+  .aba.soon{color:var(--dim);border-style:dashed;cursor:default}
+  .aba.soon em{font-style:normal;font-size:.66rem;text-transform:uppercase;letter-spacing:.05em;
+    margin-left:.45rem;padding:.05rem .4rem;border-radius:4px;background:var(--acc-soft);color:var(--acc)}
 </style>
 <noscript><style>html [data-lang="en"]{display:block}</style></noscript>
 </head>
@@ -99,6 +108,10 @@
     <button id="btn-en" onclick="setLang('en')">EN</button>
     <button id="btn-pt" onclick="setLang('pt')">PT</button>
   </nav>
+</div>
+<div class="wrap abas">
+  <span class="aba on" aria-current="page">Monitor</span>
+  <span class="aba soon" aria-disabled="true"><span data-lang="en">Evolution</span><span data-lang="pt">Evolução</span><em><span data-lang="en">coming soon</span><span data-lang="pt">em breve</span></em></span>
 </div></header>
 
 <!-- ======================================================= ENGLISH -->

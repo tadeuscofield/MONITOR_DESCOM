@@ -1,0 +1,5 @@
+# Atas, certificados e manifestos do carimbo sao conferidos pelo SHA-256 dos BYTES.
+# Sem isto, um clone no Windows (core.autocrlf=true, o padrao do Git for Windows) troca LF
+# por CRLF ao gravar o arquivo, o hash muda e a ata deixa de bater com o certificado que a
+# atesta. Medido em 02/10/2026: ata de 31/08, 735b1d16... no repositorio e 777ec45c... no clone.
+carimbo/** -text
