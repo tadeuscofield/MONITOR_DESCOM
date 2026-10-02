@@ -46,6 +46,12 @@ CLAUDE = RAIZ.parent
 ATESTAR = CLAUDE / "Blockchain-TEE" / "tools" / "atestar_lote.py"
 VERIFICADOR = CLAUDE / "DCAP-Offline-Verifier" / "cli.py"
 
+# Guarda de produção, um lugar só (Blockchain-TEE/tools/verificador_producao.py):
+# emitir e conferir só com o verificador no commit do main, sem alteração.
+sys.path.insert(0, str(ATESTAR.parent))
+from verificador_producao import (VerificadorForaDeProducao, exigir_producao,  # noqa: E402
+                                  mensagem_de_recusa)
+
 ENV = dict(os.environ, PYTHONUTF8="1")
 
 
@@ -90,6 +96,14 @@ def main():
         print(f"    pendente: {d.name}")
     if not pendentes:
         print("    tudo já atestado. Sigo direto para o site.")
+
+    # O verificador assina (passo 2) e confere (passo 4b): sem ele no main, nada roda.
+    try:
+        commit = exigir_producao(VERIFICADOR)
+        print(f"    verificador: no main ({commit}), pronto para emitir")
+    except VerificadorForaDeProducao as e:
+        print("\n" + mensagem_de_recusa(e))
+        return 1
 
     if a.dry_run:
         print("\n--dry-run: parando aqui.")

@@ -41,8 +41,14 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
 
-    if not VERIFICADOR.is_file():
-        print(f"verificador não encontrado: {VERIFICADOR}"); return 1
+    # Reassinar é emitir: só com o verificador no commit do main, sem alteração.
+    sys.path.insert(0, str(CLAUDE / "Blockchain-TEE" / "tools"))
+    from verificador_producao import (VerificadorForaDeProducao, exigir_producao,
+                                      mensagem_de_recusa)
+    try:
+        print(f"verificador: no main ({exigir_producao(VERIFICADOR)})")
+    except VerificadorForaDeProducao as e:
+        print(mensagem_de_recusa(e)); return 1
 
     alvos = []
     for d in sorted(x for x in HISTORICO.iterdir() if x.is_dir()):
