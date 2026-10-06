@@ -54,6 +54,8 @@ DIARIO_DESCOMISSIONAMENTO.xlsx
 # e não têm lugar num repositório que prova rigor.
 **/*-precertificado.json
 **/TENTATIVAS_INVALIDAS_*.csv
+# certificado e PDF de tentativa que não saiu completa e aceita (ciclo_semanal.py, 05/10/2026)
+**/*-TENTATIVA-FALHA.*
 
 # --- ruído de ferramenta ---------------------------------------------
 __pycache__/
