@@ -416,5 +416,9 @@ function setLang(l){
   setLang(salvo || (nav.indexOf('pt') === 0 ? 'pt' : 'en'));
 })();
 </script>
+<script>
+/* contador de visitas proprio da Veridis: sem cookie, sem IP; nao conta fora do dominio nem com ?nao-contar */
+(function(){try{var H="decommissioningmonitor.com";if(location.hostname.replace(/^www\./,"")!==H)return;if(location.search.indexOf("nao-contar")>-1)localStorage.setItem("veridis_nao_contar","1");if(localStorage.getItem("veridis_nao_contar"))return;var q=new URLSearchParams(location.search),d=JSON.stringify({p:location.pathname,r:document.referrer,d:q.get("de")||q.get("utm_source")||""}),u="https://veridisengenharia.com/api/v";if(navigator.sendBeacon)navigator.sendBeacon(u,d);else fetch(u,{method:"POST",body:d,keepalive:true,mode:"no-cors"});}catch(e){}})();
+</script>
 </body>
 </html>
