@@ -33,6 +33,8 @@
   .bar{display:flex;align-items:center;gap:.8rem}
   .mark{font-weight:800;letter-spacing:-.01em;font-size:1.05rem}
   .mark small{display:block;font-weight:500;color:var(--dim);font-size:.72rem;letter-spacing:.02em}
+  .mark small a{color:inherit;text-decoration:none}.mark small a:hover,.mark small a:focus-visible{text-decoration:underline}
+  .selo-link{display:flex;border-radius:6px}.selo-link:focus-visible{outline:2px solid var(--dim);outline-offset:3px}
   .selo{width:30px;height:30px;flex:0 0 30px}
   .creditos{display:flex;gap:1.1rem;align-items:flex-start;
     background:var(--card);border:1px solid var(--line);border-radius:12px;
@@ -102,8 +104,8 @@
 {{MAP_SYMBOLS}}
 
 <header class="top"><div class="wrap bar">
-  <svg class="selo" viewBox="0 0 64 64" role="img" aria-label="Veridis Engenharia e Tecnologia"><use href="#selo"/></svg>
-  <div class="mark">Decommissioning Monitor<small>by Veridis Engenharia</small></div>
+  <a class="selo-link" href="https://veridisengenharia.com/?de=monitor-topo" aria-label="Veridis Engenharia e Tecnologia"><svg class="selo" viewBox="0 0 64 64" role="img" aria-label="Veridis Engenharia e Tecnologia"><use href="#selo"/></svg></a>
+  <div class="mark">Decommissioning Monitor<small>by <a href="https://veridisengenharia.com/?de=monitor-topo">Veridis Engenharia</a></small></div>
   <nav class="lang">
     <button id="btn-en" onclick="setLang('en')">EN</button>
     <button id="btn-pt" onclick="setLang('pt')">PT</button>
@@ -233,7 +235,7 @@
   <div class="creditos">
     <svg class="selo" viewBox="0 0 64 64" role="img" aria-label="Veridis Engenharia e Tecnologia"><use href="#selo"/></svg>
     <div>
-      <p><strong>Study and authorship.</strong> Research, method, dataset and this page are the work of <a href="https://veridisengenharia.com">Veridis Engenharia e Tecnologia</a>, produced from public registers with no paid subscription and no client commissioning the result.</p>
+      <p><strong>Study and authorship.</strong> Research, method, dataset and this page are the work of <a href="https://veridisengenharia.com/?de=monitor-autoria">Veridis Engenharia e Tecnologia</a>, produced from public registers with no paid subscription and no client commissioning the result.</p>
       <p class="cit">Cite as: Cordeiro, T. S. (2026). <em>Decommissioning Monitor: offshore decommissioning datasets from Brazil, the US, the UK and Norway (2026-08-12 snapshot)</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21919402">https://doi.org/10.5281/zenodo.21919402</a> · CC BY 4.0, which allows reuse, including commercial, with attribution.</p>
     </div>
   </div>
@@ -369,7 +371,7 @@
   <div class="creditos">
     <svg class="selo" viewBox="0 0 64 64" role="img" aria-label="Veridis Engenharia e Tecnologia"><use href="#selo"/></svg>
     <div>
-      <p><strong>Estudo e autoria.</strong> A pesquisa, o método, a base e esta página são trabalho da <a href="https://veridisengenharia.com">Veridis Engenharia e Tecnologia</a>, feitos a partir de registro público, sem assinatura paga e sem cliente encomendando o resultado.</p>
+      <p><strong>Estudo e autoria.</strong> A pesquisa, o método, a base e esta página são trabalho da <a href="https://veridisengenharia.com/?de=monitor-autoria">Veridis Engenharia e Tecnologia</a>, feitos a partir de registro público, sem assinatura paga e sem cliente encomendando o resultado.</p>
       <p class="cit">Como citar: Cordeiro, T. S. (2026). <em>Decommissioning Monitor: offshore decommissioning datasets from Brazil, the US, the UK and Norway (2026-08-12 snapshot)</em>. Zenodo. <a href="https://doi.org/10.5281/zenodo.21919402">https://doi.org/10.5281/zenodo.21919402</a> · CC BY 4.0, que permite reuso, inclusive comercial, com atribuição.</p>
     </div>
   </div>
@@ -391,13 +393,13 @@
     <p>Sources: ANP (Painel Dinâmico de Descomissionamento, published under Art. 14 of ANP Resolution 817/2020), BSEE, SEC, North Sea Transition Authority, Sokkeldirektoratet.</p>
     <p>Contains data under the Norwegian Licence for Open Government Data (NLOD), distributed by Sokkeldirektoratet. Contains information provided by the North Sea Transition Authority, licensed under the Open Government Licence v3.0.</p>
   <p>Compilation licensed CC BY 4.0 · dataset and methods at the DOI above · page generated {{GERADO_UTC}} from the deposited extraction of 12 August 2026, which covers all four registers named above. The daily raw-capture routine described in the method section covers the ANP panel only.</p>
-    <p>© 2026 <a href="https://veridisengenharia.com">Veridis Engenharia</a></p>
+    <p>© 2026 <a href="https://veridisengenharia.com/?de=monitor-rodape">Veridis Engenharia</a></p>
   </div>
   <div data-lang="pt">
     <p>Fontes: ANP (Painel Dinâmico de Descomissionamento, publicidade determinada pelo art. 14 da Resolução ANP 817/2020), BSEE, SEC, North Sea Transition Authority, Sokkeldirektoratet.</p>
     <p>Contém dados sob a Licença Norueguesa para Dados Abertos de Governo (NLOD), distribuídos pelo Sokkeldirektoratet. Contém informação fornecida pela North Sea Transition Authority, sob a Open Government Licence v3.0.</p>
   <p>Compilação sob CC BY 4.0 · dataset e método no DOI acima · página gerada em {{GERADO_UTC}} a partir da extração depositada de 12 de agosto de 2026, que cobre os quatro registros citados acima. A rotina diária de captura bruta descrita na seção de método cobre apenas o painel da ANP.</p>
-    <p>© 2026 <a href="https://veridisengenharia.com">Veridis Engenharia</a></p>
+    <p>© 2026 <a href="https://veridisengenharia.com/?de=monitor-rodape">Veridis Engenharia</a></p>
   </div>
 </div></footer>
 
