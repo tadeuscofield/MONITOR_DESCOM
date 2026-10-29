@@ -18,6 +18,10 @@ interno_nao_publicar/
 09_tee_e_lastro.md
 10_plano_e_veredito.md
 
+# --- mapa global de governança (Fase 0, 14/10/2026): pesquisa interna --
+# Nada daqui sobe até a decisão explícita do que é publicável.
+global/
+
 # --- runbook interno: nomeia arquivos gitignorados, fica de fora ------
 CLAUDE.md
 
@@ -65,3 +69,6 @@ __pycache__/
 *.tmp
 Thumbs.db
 desktop.ini
+
+# --- backups locais de trabalho (nunca sobem) -----------------------
+backups_*/

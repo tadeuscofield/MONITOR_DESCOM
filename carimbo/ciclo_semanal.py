@@ -364,7 +364,7 @@ def main():
             print(f"      {k:<28} {v:+d}")
 
     print("\nCiclo fechado. Pode desligar a CVM.")
-    print("Se for publicar, o site regenerado está em site\\index.html")
+    print("Se for publicar, a página do Brasil regenerada está em site\\brazil\\index.html (a raiz é o mapa global)")
     return 0
 
 

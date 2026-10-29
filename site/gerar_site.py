@@ -8,7 +8,10 @@ mesmas receitas do LASTRO_PUBLICO.md e SÓ gera o index.html se todos os
 valores baterem com os verificados nas avaliações. Divergência = build falha
 e nenhuma página errada vai ao ar.
 
-Uso:  python gerar_site.py     →  site/index.html
+Uso:  python gerar_site.py     →  site/brazil/index.html
+
+Desde o lançamento do mapa global (30/10/2026) a raiz do domínio é o mapa
+(global/lancamento/montar.py --publicar) e esta página mora em /brazil/.
 """
 
 import csv
@@ -572,7 +575,8 @@ if tipo_falhas:
     print("BUILD RECUSADO — caractere proibido:", ", ".join(tipo_falhas))
     sys.exit(1)
 
-saida = AQUI / "index.html"
+saida = AQUI / "brazil" / "index.html"  # a raiz é do mapa global desde 30/10/2026
+saida.parent.mkdir(exist_ok=True)
 saida.write_text(html, encoding="utf-8")
 print(f"todos os números recomputados e conferidos — {len(V)} valores injetados")
 print(f"gerado: {saida}  ({saida.stat().st_size:,} bytes)")
