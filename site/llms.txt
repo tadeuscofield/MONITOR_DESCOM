@@ -1,0 +1,31 @@
+# Decommissioning Monitor
+
+> Open research by Veridis Engenharia on offshore oil and gas decommissioning data. The global map records, for 77 jurisdictions, whether end-of-life data on offshore installations exist and are publicly accessible, with the source, an excerpt and the access date for each. A second page keeps a dated series of captures of Brazil's ANP decommissioning dashboard.
+
+## What the map shows (and does not)
+
+- Question asked of each jurisdiction: does end-of-life data on offshore installations exist, and can the public access it?
+- Color shows access to data. It does not measure how much decommissioning happens, the quality of regulation, or compliance with any rule.
+- Version 1.0. Sources accessed 2026-10-14 to 2026-10-28. Not externally peer reviewed; each card links to its source and corrections from regulators and data holders are welcome (contato@veridisengenharia.com).
+- Jurisdictions by category:
+- Per-asset register: 18
+- Case-level disclosure: 11
+- Aggregates only: 13
+- End-of-life data via data service only: 3
+- No end-of-life data found: 18
+- Not verified: 14
+
+## Pages
+
+- [Global map and data table](https://decommissioningmonitor.com/): interactive map, about, coverage and limitations, table of all 77 jurisdictions with regulator and evidence links
+- [Brazil, asset by asset](https://decommissioningmonitor.com/brazil/): dated series of captures of the ANP decommissioning dashboard, installation level
+
+## Data and citation
+
+- Dataset (77 rows, one per jurisdiction), CC BY 4.0: https://doi.org/10.5281/zenodo.23761050
+- Cite as: Cordeiro, T. S. (2026). Offshore Decommissioning Data Map: public access to end-of-life data on offshore oil and gas installations in 77 jurisdictions (version 1.0, October 2026) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.23761050
+- Brazil, US, UK and Norway data deposit (2026-08-12 snapshot): https://doi.org/10.5281/zenodo.21919402
+
+## Publisher
+
+Veridis Engenharia (Brazil): https://veridisengenharia.com/
